@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// ===================== CATEGORY =====================
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  path      String   @unique
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  documents     Document[]     @relation("CategoryDocuments")
+  subTextGroups SubTextGroup[] @relation("CategoryGroups")
+  subcategories Subcategory[]
+
+  @@index([name])
+}
+
+/// ===================== SUBCATEGORY =====================
+model Subcategory {
+  id         String   @id @default(cuid())
+  categoryId String
+  name       String
+  slug       String
+  path       String   @unique
+  position   Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  documents     Document[]     @relation("SubcategoryDocuments")
+  subTextGroups SubTextGroup[] @relation("SubcategoryGroups")
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, slug])
+  @@index([categoryId, name])
+}
+
+/// ===================== SUBTEXT GROUP =====================
+model SubTextGroup {
+  id        String   @id @default(cuid())
+  title     String
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  categoryId    String?
+  subcategoryId String?
+
+  documents Document[] @relation("SubTextGroupDocuments")
+
+  category    Category?    @relation("CategoryGroups", fields: [categoryId], references: [id], onDelete: Cascade)
+  subcategory Subcategory? @relation("SubcategoryGroups", fields: [subcategoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@index([subcategoryId])
+}
+
+/// ===================== DOCUMENT =====================
+model Document {
+  id         String   @id @default(cuid())
+  name       String   @db.Text
+  url        String   @db.Text
+  fileSize   Int?
+  isExternal Boolean  @default(false)
+  uploadedAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  categoryId     String?
+  subcategoryId  String?
+  subTextGroupId String?
+
+  category     Category?     @relation("CategoryDocuments", fields: [categoryId], references: [id], onDelete: SetNull)
+  subcategory  Subcategory?  @relation("SubcategoryDocuments", fields: [subcategoryId], references: [id], onDelete: SetNull)
+  subTextGroup SubTextGroup? @relation("SubTextGroupDocuments", fields: [subTextGroupId], references: [id], onDelete: SetNull)
+
+  @@index([categoryId])
+  @@index([subcategoryId])
+  @@index([subTextGroupId])
+}

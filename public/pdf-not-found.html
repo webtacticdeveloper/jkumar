@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>File Not Found</title>
+
+  <!-- Tailwind CDN (for quick prototyping) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Small custom styles to match your brand tokens -->
+  <style>
+    :root{
+      --brand-primary: #F2D313; /* user's primary */
+      --forecolor: #1A1A1A;     /* user's foreground color */
+    }
+
+    /* Map your custom utility-like classes used in the React component */
+    .text-primary { color: var(--brand-primary); }
+    .text-forecolor { color: var(--forecolor); }
+    .hover\:text-forecolor:hover { color: var(--forecolor); }
+    .border-yellow-400 { border-color: #f6e05e; } /* tailwind yellow-400 */
+    .text-yellow-400 { color: #f6e05e; }
+    .bg-yellow-400 { background-color: #f6e05e; }
+    .hover\:bg-yellow-400:hover { background-color: #f6e05e; }
+    .hover\:bg-yellow-400\/90:hover { background-color: rgba(246, 224, 94, 0.9); }
+    /* Small transition helper so hover feels like your React version */
+    .transition { transition: all .18s ease-in-out; }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-forecolor">
+  <main class="min-h-[80vh] flex flex-col items-center justify-center text-center px-6">
+    <h1 class="text-4xl font-bold mb-4 text-primary">
+      File Not Found
+    </h1>
+
+    <p class="text-gray-500 mb-6 max-w-md">
+      The file you’re trying to access does not exist or may have been
+      moved or deleted.
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-4">
+      <button
+        id="goBackBtn"
+        class="px-6 cursor-pointer py-3 rounded-full border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-white transition font-medium"
+        aria-label="Go back"
+      >
+        Go Back
+      </button>
+
+      <button
+        id="homeBtn"
+        class="px-6 cursor-pointer py-3 rounded-full border border-yellow-400 text-white bg-yellow-400 hover:bg-yellow-400/90 hover:text-white transition font-medium"
+        aria-label="Go to home page"
+      >
+        Home Page
+      </button>
+    </div>
+  </main>
+
+  <script>
+    // Wire up the buttons to do the same actions as your Next.js router
+    document.getElementById('goBackBtn').addEventListener('click', function () {
+      // If there's a previous entry in history, go back; otherwise, go to home.
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = '/';
+      }
+    });
+
+    document.getElementById('homeBtn').addEventListener('click', function () {
+      // Navigate to the site's root
+      window.location.href = '/';
+    });
+  </script>
+</body>
+</html>
