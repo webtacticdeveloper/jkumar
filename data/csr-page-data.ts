@@ -36,8 +36,8 @@ export const csrData: CSRSection[] = [
     quote: "“An investment in knowledge pays the best interest.”",
     images: [
       "/images/csr/csr-school/school1.jpeg",
-      "/images/csr/csr-school/school2.JPG",
-      "/images/csr/csr-school/school3.JPG",
+      "/images/csr/csr-school/school2.webp",
+      "/images/csr/csr-school/school3.webp",
     ],
     description:
       "Education is the best friend. An educated person is respected everywhere ...",

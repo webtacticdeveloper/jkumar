@@ -106,7 +106,7 @@ export const Footer = () => {
 
         {/* --- Contact Info --- */}
         <div>
-          <h4 className="text-lg font-semibold text-white/80 mb-4">
+          <h4 className="text-lg font-semibold text-white mb-4">
             Contact
           </h4>
           <ul className="space-y-2 text-sm text-white/60">
@@ -122,7 +122,7 @@ export const Footer = () => {
           </ul>
         </div>
         <div>
-          <h4 className="text-lg font-semibold text-white/80 mb-4">
+          <h4 className="text-lg font-semibold text-white mb-4">
             Careers
           </h4>
           <ul className="space-y-2 text-sm text-white/60">
@@ -142,7 +142,7 @@ export const Footer = () => {
       {/* --- Bottom Bar --- */}
       <div className="relative border-t border-[var(--border)] py-6 px-6 md:px-10 text-sm">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:justify-center gap-2">
-          <p className="text-white">
+          <p className="text-white text-center">
             © {new Date().getFullYear()} J. Kumar Infraprojects Ltd. All rights
             reserved.
           </p>
@@ -150,7 +150,7 @@ export const Footer = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-white/80"
+            className="text-white/80 text-center"
           >
             Designed & Developed by{" "}
             <Link target="_blank" href={"https://webtactic.in/"} className="text-primary font-medium">Webtatic</Link>

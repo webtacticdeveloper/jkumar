@@ -23,7 +23,7 @@ export default function HeroSection() {
       {/* Background Image with Soft Overlay */}
       <div className="absolute inset-0">
         <Image
-          src="/hero/metro-hero.jpg"
+          src="/hero/metro-hero.webp"
           alt="Infrastructure Hero"
           fill
           priority

@@ -6,20 +6,20 @@ import SectionTitle from "@/app/about-us/components/SectionTitle";
 
 export default function ClientsSection() {
   const clients = [
-    "/clients/clientlogo_1.png",
-    "/clients/clientlogo_2.png",
-    "/clients/clientlogo_3.png",
-    "/clients/clientlogo_4.png",
-    "/clients/clientlogo_5.png",
-    "/clients/clientlogo_6.png",
-    "/clients/clientlogo_7.png",
-    "/clients/clientlogo_8.png",
-    "/clients/clientlogo_9.png",
-    "/clients/clientlogo_10.png",
-    "/clients/clientlogo_11.png",
-    "/clients/clientlogo_12.png",
-    "/clients/clientlogo_13.png",
-    "/clients/clientlogo_14.png",
+    "/clients/clientlogo_1.webp",
+    "/clients/clientlogo_2.webp",
+    "/clients/clientlogo_3.webp",
+    "/clients/clientlogo_4.webp",
+    "/clients/clientlogo_5.webp",
+    "/clients/clientlogo_6.webp",
+    "/clients/clientlogo_7.webp",
+    "/clients/clientlogo_8.webp",
+    "/clients/clientlogo_9.webp",
+    "/clients/clientlogo_10.webp",
+    "/clients/clientlogo_11.webp",
+    "/clients/clientlogo_12.webp",
+    "/clients/clientlogo_13.webp",
+    "/clients/clientlogo_14.webp",
   ];
 
   const firstRow = clients.slice(0, 7);

@@ -12,7 +12,7 @@ export default function Page() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/hero/awards-bg.jpg"
+            src="/hero/awards-bg.webp"
             alt="Awards Background"
             fill
             priority

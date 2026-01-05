@@ -45,7 +45,7 @@ function NavItem({ item, scrolled, depth = 0 }: any) {
           className={cn(
             "relative flex items-center gap-x-2 transition cursor-pointer group-hover:text-[var(--primary)]",
             scrolled
-              ? "text-[var(--overlay-light)]"
+              ? "text-white"
               : "text-[var(--overlay-light)]"
           )}
         >

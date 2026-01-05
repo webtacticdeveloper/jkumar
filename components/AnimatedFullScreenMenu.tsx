@@ -83,7 +83,7 @@ export default function AnimatedFullScreenMenu({
       {/* menu toggle button */}
       <button
         onClick={() => setOpen(true)}
-        className={`${scrolled ? "text-[var(--overlay-light)]" : "text-[var(--overlay-light)]"} hover:text-[#F2D313] transition cursor-pointer`}
+        className={`${scrolled ? "text-white" : "text-[var(--overlay-light)]"} hover:text-[#F2D313] transition cursor-pointer`}
       >
         <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />

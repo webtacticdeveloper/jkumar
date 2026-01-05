@@ -17,7 +17,7 @@ export default function LeadershipHero() {
           className="hidden md:block relative w-[30%] md:w-[25%] h-[70%] rounded-2xl overflow-hidden mx-2 md:mx-4"
         >
           <Image
-            src={leaders[1]?.image || "/images/leader1.jpg"}
+            src={leaders[1]?.image || "/images/leader1.webp"}
             alt={leaders[1]?.name || "Leader"}
             fill
             className="object-cover opacity-90"
@@ -33,7 +33,7 @@ export default function LeadershipHero() {
           className="relative w-full md:w-[35%] h-[85%] rounded-2xl overflow-hidden mx-2 md:mx-6 shadow-[0_0_40px_rgba(255,255,255,0.15)]"
         >
           <Image
-            src={leaders[0]?.image || "/images/leader2.jpg"}
+            src={leaders[0]?.image || "/images/leader2.webp"}
             alt={leaders[0]?.name || "Leader"}
             fill
             className="object-cover opacity-90"
@@ -49,7 +49,7 @@ export default function LeadershipHero() {
           className="relative hidden md:block w-[30%] md:w-[25%] h-[70%] rounded-2xl overflow-hidden mx-2 md:mx-4"
         >
           <Image
-            src={leaders[2]?.image || "/images/leader3.jpg"}
+            src={leaders[2]?.image || "/images/leader3.webp"}
             alt={leaders[2]?.name || "Leader"}
             fill
             className="object-cover opacity-90"

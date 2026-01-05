@@ -6,13 +6,13 @@ import Link from "next/link";
 
 // Data for the carousel slides.
 const slidesData = [
-  { id: "metro", title: "Metro", imageUrl: "/images/metro/1761296408714-metro1.jpg" },
-  { id: "flyovers", title: "Flyovers", imageUrl: "/images/flyovers/1761406809389-home-flyover.jpg" },
-  { id: "bridges", title: "Bridges", imageUrl: "/images/bridges/1761641394117-home-bridges1.jpg" },
-  { id: "roads", title: "Roads", imageUrl: "/images/roads/1761732119877-home-roads1.jpg" },
-  { id: "urban-infra", title: "Urban Infra", imageUrl: "/images/urban-infra/1761743358627-JKI_0857.jpg" },
-  { id: "sky-walks", title: "Sky Walks", imageUrl: "/images/sky-walks/1761800803511-skywalk3.jpg" },
-  { id: "dams-and-canals", title: "Dams & Canals", imageUrl: "/images/dams-and-canals/1761803677717-DAM_NEW2.jpg" },
+  { id: "metro", title: "Metro", imageUrl: "/images/metro/1761296408714-metro1.webp" },
+  { id: "flyovers", title: "Flyovers", imageUrl: "/images/flyovers/1761406809389-home-flyover.webp" },
+  { id: "bridges", title: "Bridges", imageUrl: "/images/bridges/1761641394117-home-bridges1.webp" },
+  { id: "roads", title: "Roads", imageUrl: "/images/roads/1761732119877-home-roads1.webp" },
+  { id: "urban-infra", title: "Urban Infra", imageUrl: "/images/urban-infra/1761743358627-JKI_0857.webp" },
+  { id: "sky-walks", title: "Sky Walks", imageUrl: "/images/sky-walks/1761800803511-skywalk3.webp" },
+  { id: "dams-and-canals", title: "Dams & Canals", imageUrl: "/images/dams-and-canals/1761803677717-DAM_NEW2.webp" },
 ];
 
 // Debounce function for resize events

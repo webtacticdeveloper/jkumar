@@ -111,7 +111,7 @@ export default function BoardOfDirectorsPage() {
 
         {/* -------------- TABLE: COMMITTEE COMPOSITION -------------- */}
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-          <h3 className="text-xl font-semibold text-primary mb-4">
+          <h3 className="text-xl font-semibold text-black mb-4">
             Key Managerial Personnel
           </h3>
 
@@ -141,6 +141,7 @@ export default function BoardOfDirectorsPage() {
         {/* Link Section */}
         <div className="mt-6">
           <Link
+          target="_blank"
             href="/storage/reportFile/BoardCommittees.pdf"
             className="text-primary text-lg font-medium"
           >

@@ -61,7 +61,7 @@ export default function Navbar({ categories }: any) {
         <h1
           className={`font-semibold tracking-wide transition-all duration-300 ${
             scrolled || !isTransparentPage
-              ? "text-[var(--overlay-light)] text-sm"
+              ? "text-white text-sm"
               : "text-[var(--overlay-light)] text-sm md:text-base"
           }`}
         >
@@ -77,7 +77,7 @@ export default function Navbar({ categories }: any) {
             overflow-visible   /* <-- IMPORTANT FIX */
             ${
               scrolled || !isTransparentPage
-                ? "text-[var(--overlay-light)]"
+                ? "text-white"
                 : "text-[var(--overlay-light)]"
             }
           `}

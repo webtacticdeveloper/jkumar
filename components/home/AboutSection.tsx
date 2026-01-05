@@ -39,7 +39,7 @@ export default function AboutSection() {
               {/* Main Image */}
               <div className="absolute inset-0 rounded-md overflow-hidden shadow-xl">
                 <Image
-                  src="/hero/hero-about.jpg"
+                  src="/hero/hero-about.webp"
                   alt="About J Kumar"
                   fill
                   className="object-cover"
