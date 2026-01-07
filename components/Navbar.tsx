@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AnimatedFullScreenMenu from "./AnimatedFullScreenMenu";
-import Image from "next/image";
 import NavItem from "./NavItem";
 
 const transparentRoutes = ["/", "/about-us", "/awards", "/our-leadership"];
@@ -14,20 +14,19 @@ export default function Navbar({ categories }: any) {
   const pathname = usePathname();
   const isTransparentPage = transparentRoutes.includes(pathname);
 
-  
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   const bgClass = (() => {
     if (!isTransparentPage) return "bg-black/90 shadow-md";
     if (scrolled) return "bg-black/90 shadow-md";
     return "bg-transparent";
   })();
-  
-  if(pathname.includes("pdf"))return null;
+
+  if (pathname.includes("pdf")) return null;
   return (
     <nav
       className={`
@@ -48,13 +47,14 @@ export default function Navbar({ categories }: any) {
               : "h-14 w-14 bg-[var(--card)] card-shadow"
           }`}
         >
-          <Image
+          <img
             src="/jkumar_logo_white.png"
             alt="JKumar Logo"
-            width={200}
-            height={200}
-            priority
+            width="200"
+            height="200"
             className={`${scrolled ? "h-9" : "h-12"} w-auto transition-all`}
+            loading="eager"
+            decoding="async"
           />
         </div>
 
@@ -83,7 +83,11 @@ export default function Navbar({ categories }: any) {
           `}
         >
           {/* <Dropdown scrolled={scrolled || !isTransparentPage} data={categories} /> */}
-              <NavItem scrolled={scrolled||!isTransparentPage} item={categories} depth={0} />
+          <NavItem
+            scrolled={scrolled || !isTransparentPage}
+            item={categories}
+            depth={0}
+          />
           <a
             href="mailto:info@jkumar.com"
             className="relative group hover:text-[var(--primary)] transition"

@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import SectionMotion from "./SectionMotion";
 import { Marquee } from "@/components/ui/marquee"; // your marquee
 import SectionTitle from "@/app/about-us/components/SectionTitle";
@@ -38,12 +38,12 @@ export default function ClientsSection() {
               className="mx-5 opacity-80 hover:opacity-100 transition"
             >
               <div className="relative w-28 h-28 md:w-36 md:h-36">
-                <Image
+                <img
                   src={logo}
                   alt="Client Logo"
-                  fill
-                  className="object-contain border-2 rounded-2xl shadow-2xl"
-                  sizes="140px"
+                  className="absolute inset-0 w-full h-full object-contain border-2 rounded-2xl shadow-2xl"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -58,12 +58,12 @@ export default function ClientsSection() {
               className="mx-5 opacity-80 hover:opacity-100 transition"
             >
               <div className="relative w-28 h-28 md:w-36 md:h-36">
-                <Image
+                <img
                   src={logo}
                   alt="Client Logo"
-                  fill
-                  className="object-contain border-2 rounded-2xl shadow-2xl"
-                  sizes="140px"
+                  className="absolute inset-0 w-full h-full object-contain border-2 rounded-2xl shadow-2xl"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

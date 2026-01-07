@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { leaders } from "@/data/about-page-data";
-import Image from "next/image";
 import { useState } from "react";
 
 export default function AboutLeadership() {
@@ -38,13 +38,14 @@ export default function AboutLeadership() {
           >
             {/* --- Image Panel --- */}
             <div className="relative w-full md:w-1/2 overflow-hidden rounded-2xl border border-[var(--border)] shadow-[0_10px_40px_rgba(0,0,0,0.25)] group">
-              <Image
+              <img
                 src={leader.image}
                 alt={leader.name}
-                width={600}
-                height={400}
+                width="600"
+                height="400"
                 className="object-cover w-full h-[380px] rounded-2xl transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundSize: "100% 100%" }}
+                loading="lazy"
+                decoding="async"
               />
 
               {/* --- Stronger Golden Overlay --- */}

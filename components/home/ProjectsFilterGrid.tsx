@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -5,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { projectCategories } from "@/data/projectsData";
 import SectionMotion from "./SectionMotion";
 import Link from "next/link";
-import Image from "next/image";
 import SectionTitle from "@/app/about-us/components/SectionTitle";
 
 export default function ProjectsFilterGrid() {
@@ -35,13 +35,17 @@ export default function ProjectsFilterGrid() {
           })) ?? [];
 
   // SHOW ALL / LESS
-  const projects = showAll ? projectCategories.flatMap((cat) => cat.projects.slice(0, 6).map((p) => ({ ...p, categoryId: cat.id })) ) : baseProjects.slice(0, 6);
+  const projects = showAll
+    ? projectCategories.flatMap((cat) =>
+        cat.projects.slice(0, 6).map((p) => ({ ...p, categoryId: cat.id }))
+      )
+    : baseProjects.slice(0, 6);
 
   return (
     <SectionMotion>
       <section className="py-20  max-w-7xl mx-auto px-6 md:px-16">
         {/* HEADING */}
-        <SectionTitle white title="Our Projects"/>
+        <SectionTitle white title="Our Projects" />
 
         {/* FILTER BUTTONS */}
         <motion.div className="flex gap-4 flex-wrap mb-12 justify-center">
@@ -78,11 +82,12 @@ export default function ProjectsFilterGrid() {
                 className="group relative overflow-hidden rounded-2xl border border-[var(--border)] hover:border-[var(--primary)] transition shadow-sm hover:shadow-[0_0_18px_rgba(242,211,19,0.25)]"
               >
                 <div className="relative w-full h-64">
-                  <Image
+                  <img
                     src={proj.image}
                     alt={proj.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-500"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 

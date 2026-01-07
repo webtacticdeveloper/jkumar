@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useParams, notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { projectCategories } from "@/data/projectsData";
 import ImageGallery from "@/components/ImageGallery";
@@ -25,7 +25,6 @@ export default function ProjectSlugPage() {
     return (
       <section className="w-full bg-background text-[var(--foreground)] pt-10 pb-24 px-4 md:px-8 ">
         <div className="max-w-7xl mx-auto space-y-14">
-
           {/* CATEGORY TITLE */}
           <div>
             <div className="flex items-center justify-center gap-4 mb-4">
@@ -42,28 +41,27 @@ export default function ProjectSlugPage() {
 
           {/*  Showcase Grid */}
           {/* <div className="grid md:grid-cols-2 gap-6 md:gap-10 max-w-5xl mx-auto"> */}
-            {/* {categoryData.showcaseImages.map((img, index) => ( */}
-              {/* <div */}
-                {/* key={index} */}
-                {/* className="relative group overflow-hidden rounded-2xl border border-[var(--border)] hover:border-[var(--primary)] transition shadow-sm hover:shadow-[0_0_20px_rgba(242,211,19,0.25)]" */}
-              {/* > */}
-                {/* <Image */}
-                  {/* src={img} */}
-                  {/* alt={`${categoryData.title} showcase ${index + 1}`} */}
-                  {/* width={900} */}
-                  {/* height={900} */}
-                  {/* className="w-full h-full object-cover group-hover:scale-105 transition duration-500" */}
-                {/* /> */}
+          {/* {categoryData.showcaseImages.map((img, index) => ( */}
+          {/* <div */}
+          {/* key={index} */}
+          {/* className="relative group overflow-hidden rounded-2xl border border-[var(--border)] hover:border-[var(--primary)] transition shadow-sm hover:shadow-[0_0_20px_rgba(242,211,19,0.25)]" */}
+          {/* > */}
+          {/* <Image */}
+          {/* src={img} */}
+          {/* alt={`${categoryData.title} showcase ${index + 1}`} */}
+          {/* width={900} */}
+          {/* height={900} */}
+          {/* className="w-full h-full object-cover group-hover:scale-105 transition duration-500" */}
+          {/* /> */}
 
-                {/* Subtle overlay */}
-                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" /> */}
-              {/* </div> */}
-            {/* ))} */}
+          {/* Subtle overlay */}
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" /> */}
+          {/* </div> */}
+          {/* ))} */}
           {/* </div> */}
 
           {/* PROJECT LIST */}
           <div className="pt-10">
-
             <h3 className="flex items-center justify-center gap-x-2 text-2xl font-semibold text-[var(--primary)] mb-6">
               <div className="h-[2px] w-16 bg-gradient-to-r via-primary to-primary" />
               All Projects
@@ -77,13 +75,16 @@ export default function ProjectSlugPage() {
                   href={`/projects/${categoryId}/${proj.id}`}
                   className="group relative overflow-hidden rounded-2xl border border-[var(--border)] hover:border-[var(--primary)] transition shadow-sm hover:shadow-[0_0_18px_rgba(242,211,19,0.25)]"
                 >
-                  <Image
+                  <img
                     src={proj.image}
                     alt={proj.title}
-                    width={500}
-                    height={400}
+                    width="500"
+                    height="400"
                     className="w-full h-64 object-cover group-hover:scale-105 transition duration-500"
+                    loading="lazy"
+                    decoding="async"
                   />
+
                   <h3 className="absolute z-10 bottom-4 left-4 text-lg md:text-xl font-semibold text-[var(--primary)] drop-shadow">
                     {proj.title}
                   </h3>
@@ -110,10 +111,11 @@ export default function ProjectSlugPage() {
                   <Link
                     key={c.id}
                     href={isActive ? "#" : `/projects/${c.id}`}
-                    className={`text-center transition ${isActive
+                    className={`text-center transition ${
+                      isActive
                         ? "text-[var(--primary)] font-semibold pointer-events-none"
                         : "hover:text-[var(--primary)]"
-                      }`}
+                    }`}
                   >
                     {c.title}
                   </Link>
@@ -139,7 +141,6 @@ export default function ProjectSlugPage() {
   return (
     <section className="w-full bg-background text-[var(--foreground)] pt-10 pb-28 px-4 md:px-8 ">
       <div className="max-w-7xl mx-auto space-y-16">
-
         {/* PROJECT TITLE */}
         <div>
           <div className="flex items-center justify-center gap-4 mb-4">
@@ -166,10 +167,10 @@ export default function ProjectSlugPage() {
         <div className="pt-10">
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-[2px] w-16 bg-gradient-to-r via-primary to-primary" />
-              <h3 className="text-2xl font-semibold text-[var(--primary)] text-center">
-                Other {categoryData.title} Projects
-              </h3>
-              <div className="h-[2px] w-16 bg-gradient-to-r from-primary via-primary" />
+            <h3 className="text-2xl font-semibold text-[var(--primary)] text-center">
+              Other {categoryData.title} Projects
+            </h3>
+            <div className="h-[2px] w-16 bg-gradient-to-r from-primary via-primary" />
           </div>
 
           <div className="grid md:grid-cols-3 gap-y-4 md:gap-x-12 text-base md:text-lg">
@@ -179,10 +180,11 @@ export default function ProjectSlugPage() {
                 <Link
                   key={p.id}
                   href={isActive ? "#" : `/projects/${categoryId}/${p.id}`}
-                  className={`text-center transition ${isActive
+                  className={`text-center transition ${
+                    isActive
                       ? "text-[var(--primary)] font-semibold pointer-events-none"
                       : "hover:text-[var(--primary)]"
-                    }`}
+                  }`}
                 >
                   {p.title}
                 </Link>
@@ -190,7 +192,6 @@ export default function ProjectSlugPage() {
             })}
           </div>
         </div>
-
       </div>
     </section>
   );

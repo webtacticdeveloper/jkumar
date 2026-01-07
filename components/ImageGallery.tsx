@@ -3,7 +3,6 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
-import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -26,7 +25,6 @@ import {
 import SwiperCore from "swiper";
 // eslint-disable-next-line react-hooks/rules-of-hooks
 SwiperCore.use([Navigation, Thumbs, Zoom, Keyboard, Mousewheel, Pagination]);
-
 
 interface ImageGalleryProps {
   images: string[];
@@ -138,13 +136,16 @@ export default function ImageGallery({
             className="relative group overflow-hidden rounded-xl border border-[var(--border)]
             hover:border-[var(--primary)] transition cursor-pointer shadow-xl hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
           >
-            <Image
+            <img
               src={img}
               alt={`${altPrefix} ${i + 1}`}
-              width={800}
-              height={600}
+              width="800"
+              height="600"
               className="w-full h-56 object-cover group-hover:scale-105 transition duration-500"
+              loading="lazy"
+              decoding="async"
             />
+
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent pointer-events-none" />
           </div>
         ))}
@@ -173,7 +174,10 @@ export default function ImageGallery({
             <button
               aria-label="Previous image"
               onClick={showPrev}
-              className={cn("absolute cursor-pointer left-4 md:left-8 z-[999999] text-white hover:text-[var(--primary)] transition",activeIndex===0?"hidden":"block")}
+              className={cn(
+                "absolute cursor-pointer left-4 md:left-8 z-[999999] text-white hover:text-[var(--primary)] transition",
+                activeIndex === 0 ? "hidden" : "block"
+              )}
             >
               <ChevronLeft size={50} />
             </button>
@@ -182,7 +186,10 @@ export default function ImageGallery({
             <button
               aria-label="Next image"
               onClick={showNext}
-              className={cn("absolute cursor-pointer right-4 md:right-8 z-[999999] text-white hover:text-[var(--primary)] transition",activeIndex===images.length-1?"hidden":"block")}
+              className={cn(
+                "absolute cursor-pointer right-4 md:right-8 z-[999999] text-white hover:text-[var(--primary)] transition",
+                activeIndex === images.length - 1 ? "hidden" : "block"
+              )}
             >
               <ChevronRight size={50} />
             </button>
@@ -229,7 +236,10 @@ export default function ImageGallery({
                   className="h-[92vh] flex items-center justify-center"
                 >
                   {images.map((src, idx) => (
-                    <SwiperSlide key={idx} className="flex items-center justify-center">
+                    <SwiperSlide
+                      key={idx}
+                      className="flex items-center justify-center"
+                    >
                       {/* Swiper zoom container expects a child with class 'swiper-zoom-container' */}
                       <div className="swiper-zoom-container w-full h-full flex items-center justify-center">
                         {/* Use native img here so swiper zoom / pinch works perfectly */}

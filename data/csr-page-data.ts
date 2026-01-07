@@ -35,7 +35,7 @@ export const csrData: CSRSection[] = [
     slug: "jkumar-international-school",
     quote: "“An investment in knowledge pays the best interest.”",
     images: [
-      "/images/csr/csr-school/school1.jpeg",
+      "/images/csr/csr-school/school1.webp",
       "/images/csr/csr-school/school2.webp",
       "/images/csr/csr-school/school3.webp",
     ],

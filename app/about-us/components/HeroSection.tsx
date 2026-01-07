@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Image from "next/image";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,14 +23,14 @@ export default function HeroSection() {
     <section className="relative w-full min-h-[100vh] pt-40 pb-28">
       {/* Background Image with Soft Overlay */}
       <div className="absolute inset-0">
-        <Image
+        <img
           src="/hero/metro-hero.webp"
           alt="Infrastructure Hero"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
+          className="object-cover absolute inset-0 w-full h-full"
+          loading="eager"
+          decoding="async"
         />
+
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/60 to-black"></div>
       </div>
 

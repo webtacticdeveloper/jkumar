@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Image from "next/image";
 import { awardsData } from "@/data/about-page-data";
 import { motion } from "framer-motion";
 
@@ -11,13 +11,12 @@ export default function Page() {
       <div className="relative w-full h-[100vh] flex items-center justify-center text-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <Image
+          <img
             src="/hero/awards-bg.webp"
             alt="Awards Background"
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
+            className="object-cover absolute inset-0 w-full h-full"
+            loading="eager"
+            decoding="async"
           />
 
           {/* Overlay */}
@@ -41,7 +40,8 @@ export default function Page() {
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
             className="text-white text-base md:text-lg"
           >
-            Celebrating milestones of excellence, innovation, and leadership that define our legacy.
+            Celebrating milestones of excellence, innovation, and leadership
+            that define our legacy.
           </motion.p>
         </div>
 
@@ -88,14 +88,12 @@ export default function Page() {
             >
               {/* Image Wrapper */}
               <div className="relative flex justify-center w-full aspect-[4/4] overflow-hidden">
-                <Image
+                <img
                   src={award.image}
                   alt={award.description}
-                  fill
-                  className="object-fill transform group-hover:scale-105 transition-transform duration-500 p-5"
-                  sizes="(max-width: 768px) 100vw,
-                         (max-width: 1200px) 50vw,
-                         33vw"
+                  className="absolute inset-0 w-full h-full object-fill transform group-hover:scale-105 transition-transform duration-500 p-5"
+                  loading="lazy"
+                  decoding="async"
                 />
 
                 {/* Hover Overlay */}

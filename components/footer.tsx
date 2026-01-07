@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React from "react";
@@ -7,12 +8,11 @@ import { motion } from "motion/react";
 import { GrLinkedinOption, GrFacebookOption } from "react-icons/gr";
 import { FaXTwitter } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export const Footer = () => {
   const pathname = usePathname();
-  if(pathname.includes("pdf"))return null;
+  if (pathname.includes("pdf")) return null;
 
   return (
     <footer
@@ -27,11 +27,13 @@ export const Footer = () => {
         <div className="col-span-1 md:col-span-2">
           <h3 className="text-2xl  font-bold  mb-4 tracking-wide">
             <Link href={"/"} className="flex gap-x-5 items-center text-white">
-              <Image
+              <img
                 src="/jkumar_logo_white.png"
                 alt="JKumar Logo"
-                width={30}
-                height={30}
+                width="30"
+                height="30"
+                loading="eager"
+                decoding="async"
               />
               J. Kumar Infra
             </Link>
@@ -106,9 +108,7 @@ export const Footer = () => {
 
         {/* --- Contact Info --- */}
         <div>
-          <h4 className="text-lg font-semibold text-white mb-4">
-            Contact
-          </h4>
+          <h4 className="text-lg font-semibold text-white mb-4">Contact</h4>
           <ul className="space-y-2 text-sm text-white/60">
             <li>Mumbai, Maharashtra, India</li>
             <li>
@@ -122,9 +122,7 @@ export const Footer = () => {
           </ul>
         </div>
         <div>
-          <h4 className="text-lg font-semibold text-white mb-4">
-            Careers
-          </h4>
+          <h4 className="text-lg font-semibold text-white mb-4">Careers</h4>
           <ul className="space-y-2 text-sm text-white/60">
             <li>Work Opportunities</li>
             <li>
@@ -153,7 +151,13 @@ export const Footer = () => {
             className="text-white/80 text-center"
           >
             Designed & Developed by{" "}
-            <Link target="_blank" href={"https://webtactic.in/"} className="text-primary font-medium">Webtatic</Link>
+            <Link
+              target="_blank"
+              href={"https://webtactic.in/"}
+              className="text-primary font-medium"
+            >
+              Webtatic
+            </Link>
           </motion.p>
         </div>
       </div>
