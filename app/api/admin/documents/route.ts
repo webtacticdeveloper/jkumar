@@ -12,33 +12,12 @@ import { authGuard } from "../_lib/auth";
 
 function toAbsStorage(p: string) {
   const pathname = p.startsWith("http") ? new URL(p).pathname : p;
-
-  // DB url: /storage/reportFile/xyz.pdf
   const rel = pathname.replace(/^\/?storage\/reportFile\/?/, "");
-
   return path.join(process.cwd(), "reportFile", rel);
 }
 
-function sanitizeBaseName(name: string) {
-  return name
-    .replace(/\s+/g, "_")
-    .replace(/[^a-zA-Z0-9._-]/g, "_")
-    .replace(/_+/g, "_")
-    .replace(/^_+|_+$/g, "");
-}
-
-async function ensureDir(dir: string) {
+function ensureDir(dir: string) {
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-}
-
-async function getUniqueFileName(dir: string, base: string, ext: string) {
-  let name = `${base}.${ext}`;
-  let counter = 1;
-  while (existsSync(path.join(dir, name))) {
-    name = `${base}-${counter}.${ext}`;
-    counter++;
-  }
-  return name;
 }
 
 const ALLOWED = [
@@ -54,7 +33,7 @@ const ALLOWED = [
 ];
 
 /* -----------------------------------------------------
-   PUT — update document (STRICT)
+   PUT — update document (URL IMMUTABLE)
 ------------------------------------------------------*/
 export async function PUT(req: NextRequest) {
   const guard = authGuard(req);
@@ -72,18 +51,20 @@ export async function PUT(req: NextRequest) {
     const form = await req.formData();
 
     const id = String(form.get("id") || "");
-    if (!id)
+    if (!id) {
       return NextResponse.json(
         { error: "Document ID missing" },
         { status: 400 }
       );
+    }
 
     const doc = await prisma.document.findUnique({ where: { id } });
-    if (!doc)
+    if (!doc) {
       return NextResponse.json(
         { error: "Document not found" },
         { status: 404 }
       );
+    }
 
     const name = form.get("name") ? String(form.get("name")) : undefined;
     const file = form.get("file") as File | null;
@@ -93,15 +74,11 @@ export async function PUT(req: NextRequest) {
       ? String(form.get("externalUrl"))
       : "";
 
-    /* --------------------------
-       Prepare DB updates
-    ---------------------------*/
     const updates: any = {};
-
     if (name) updates.name = name;
 
     /* =====================================================
-       CASE 0 — SWITCH TO EXTERNAL (FIXED BUG)
+       CASE 0 — SWITCH TO EXTERNAL
     ===================================================== */
     if (useExternal) {
       if (!externalUrl.trim()) {
@@ -113,10 +90,8 @@ export async function PUT(req: NextRequest) {
 
       // delete old internal file
       if (!doc.isExternal) {
-        const oldAbs = toAbsStorage(doc.url);
-        if (existsSync(oldAbs)) {
-          await unlink(oldAbs).catch(() => {});
-        }
+        const abs = toAbsStorage(doc.url);
+        if (existsSync(abs)) await unlink(abs).catch(() => {});
       }
 
       const updated = await prisma.document.update({
@@ -144,44 +119,37 @@ export async function PUT(req: NextRequest) {
     }
 
     /* =====================================================
-       CASE 2 — FILE UPDATE
+       CASE 2 — FILE REPLACE (SAME URL)
     ===================================================== */
-    const ext = (file.name.split(".").pop() || "").toLowerCase();
-    if (!ALLOWED.includes(ext)) {
+    const uploadedExt = (file.name.split(".").pop() || "").toLowerCase();
+    if (!ALLOWED.includes(uploadedExt)) {
       return NextResponse.json(
         { error: "Invalid file type" },
         { status: 400 }
       );
     }
 
-    // delete old internal file
-    if (!doc.isExternal) {
-      const oldAbs = toAbsStorage(doc.url);
-      if (existsSync(oldAbs)) {
-        await unlink(oldAbs).catch(() => {});
-      }
+    // extension must stay the same
+    const existingExt = path
+      .extname(doc.url)
+      .replace(".", "")
+      .toLowerCase();
+
+    if (existingExt !== uploadedExt) {
+      return NextResponse.json(
+        { error: "File extension must remain the same" },
+        { status: 400 }
+      );
     }
 
-    const baseName = sanitizeBaseName(
-      file.name.replace(/\.[^/.]+$/, "")
-    );
+    // ensure directory exists
+    const absPath = toAbsStorage(doc.url);
+    await ensureDir(path.dirname(absPath));
 
-    /* ------------------------------------------------
-       PHYSICAL STORAGE: /reportFile
-    ------------------------------------------------ */
-    const absDir = path.join(process.cwd(), "reportFile");
-    await ensureDir(absDir);
-
-    const finalName = await getUniqueFileName(absDir, baseName, ext);
-    const absPath = path.join(absDir, finalName);
-
+    // overwrite file (URL unchanged)
     const buffer = Buffer.from(await file.arrayBuffer());
     await writeFile(absPath, buffer);
 
-    /* ------------------------------------------------
-       PUBLIC URL (DB)
-    ------------------------------------------------ */
-    updates.url = `/storage/reportFile/${finalName}`;
     updates.fileSize = buffer.byteLength;
     updates.isExternal = false;
 
@@ -213,13 +181,12 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: "id required" }, { status: 400 });
 
     const doc = await prisma.document.findUnique({ where: { id } });
-    if (!doc) return NextResponse.json({ error: "not found" }, { status: 404 });
+    if (!doc)
+      return NextResponse.json({ error: "not found" }, { status: 404 });
 
     if (!doc.isExternal) {
       const abs = toAbsStorage(doc.url);
-      if (existsSync(abs)) {
-        await unlink(abs).catch(() => {});
-      }
+      if (existsSync(abs)) await unlink(abs).catch(() => {});
     }
 
     await prisma.document.delete({ where: { id } });
